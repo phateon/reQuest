@@ -7,7 +7,7 @@ from flask import Flask
 from request.view import qaBlue
 
 app = Flask(__name__)
-app.secret_key = 'lkshalufr8e4984anlap9e8rr87zfdvys'
+app.secret_key = 'your super secret app key'
 
 app.register_blueprint(qaBlue)
 

@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<title>reQuest</title>
+
+		<link href="/static/request.css" rel="stylesheet" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css' />
+		<script src="/static/script/jquery-1.9.1.js"></script>
+		<script src="/static/script/request.js"></script>
+
+		{% block head %}
+		{% endblock %}
+	</head>
+
+	<body>
+		<div id="background">Lorem ipsum dolor sit amet, <em>Peter</em> sadipscing elitr, sed diam nonumy eirmod tempor invidunt.<em>&nbsp;&Alpha;&iota;&sigma;&chi;&upsilon;&lambda;&omicron;&sigmaf;&nbsp;</em> aliquyam erat, sed diam voluptua. At <em>Verena</em> eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. <em>&nbsp;&#2342;&#2352;&#2381;&#2358;&#2344;&#2366;&nbsp;</em> ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmodStet clita 
+</em>&nbsp;&#1593;&#1575;&#1604;&#1610;&nbsp;</em> gubergren, no sea takimata sanctus est <em>Maria</em> ipsum dolor sit amet. Duis <em>&nbsp;&#1040;&#1085;&#1072;&#1089;&#1090;&#1072;&#1089;&#1080;&#1103;&nbsp;</em> vel eum iriure dolor in hendrerit in vulputate velit esse molestie <em>&nbsp;&#33738;&nbsp;</em>, vel illum dolore eu feugiat <em>Irina</em> facilisis tempor <em>Piotr</em> ut labore et dolore magna aliquyam erat, sed <em>Kikuyu</em> voluptua. At vero eos et accusam et justo duo dolores et <em>Francois</em> rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur <em>Lomwe</em> elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam <em>Alvar</em>, sed diam voluptua. At vero eros et accumsan et iusto odio dignissim <em>&nbsp;&#2342;&#2352;&#2381;&#2358;&#2344;&#2366;&nbsp;</em> blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</div>
+		<div id="header">
+			<div id="logoBack">
+				<div class="contentRestrict">
+					<div class="logoText"><em>re</em>Quest</div>
+				</div>
+			</div>	    
+			
+			<div id="subHead">
+				<div class="contentRestrict">
+					<div id="nav">
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div id="wrapper">
+			<div class="contentRestrict">
+				<div id="content">
+					{% if request_obj %}
+						{% if request_obj.finished %}
+							<div class="payment">Thank you for solving this task. Use this reply code:<em>{{request_obj.reply}}</em> on the CrowdFlower website to collect your payment.</div>
+						{% else %}
+							<div class="feedback yellow">
+								<div class="post-title">Instructions</div>
+								TODO place your task instructions here
+							</div>
+
+							{% for request in request_obj.requests %}
+							
+								<div class="request">
+									<div>
+				 						{% autoescape false %}
+										{{request.fragment}}
+										{% endautoescape %}
+									</div>
+			 					</div>
+				 								
+								{% if request.solved %}
+									<div class="feedback yellow">
+										Your Response:
+										<div class="response white">{{request.response}}</div>
+										{{request.feedback}}
+									</div>
+									
+								{% else %}
+									<div class="feedback yellow">
+										<!-- Please Enter your Question  -->
+										please enter your keyword
+										<textarea	class="response" id="qa_{{request.index}}"
+													onkeyup="handleKeyUp(event,'{{request.index}}',{{request.task_id}})"></textarea>
+									</div>
+								{% endif %}
+							{% endfor %}
+						{% endif %}
+					{% else %}
+						<div class="post">There is no task with this id.</div>
+					{% endif %}
+				</div>				
+			</div>
+		</div>
+		
+		<div id="footer">
+			<div class="contentRestrict">
+				<p class="credits">Markus Krause</p>
+			</div>
+		</div>
+	</body>
+</html>
